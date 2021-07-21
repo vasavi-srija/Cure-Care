@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cure & Care</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{{url_for('static', filename='layout.css')}}" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body id="top">
+
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" style="background-image:url('./static/bg_black.jpg');">
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_left">
+
+        <ul class="nospace">
+          <img src="{{url_for('static', filename='logo_final_1_75.png')}}" alt="John" >
+        </ul>
+
+      </div>
+      <div class="fl_right">
+
+        <ul class="nospace">
+
+          <li><a href="{{ url_for('login') }}" title="Login"><i class="fa fa-sign-in"></i></a></li>
+          <li><a title="Search"><i class="fa fa-search"></i></a></li>
+          <li id="searchform">
+            <a title="Search"></a>
+            <div>
+              <form action="#" method="post">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter search term&hellip;">
+                  <button type="submit"></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+
+        <h1><a href="{{ url_for('home') }}">Cure & Care</a></h1>
+
+      </div>
+      <nav id="mainav" class="fl_right">
+
+        <ul class="clear">
+          <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('helpline') }}">Contact Us</a></li>
+          <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+
+      </nav>
+    </header>
+  </div>
+
+  <div id="pageintro" class="hoc clear">
+
+    <article>
+      <h1 class = "heading">COVID-19 HELP CENTER</h1>
+      <p>Staying apart is the best way to stay United.</p>
+
+    </article>
+
+  </div>
+
+</div>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        <li class="one_quarter first">
+          <figure><img src="{{url_for('static', filename='symtom.png')}}" alt="John" >
+            <figcaption>
+              <h6 class="heading">Covid Predictor</h6>
+              <p>Get checked for COVID-19.</p>
+              <p><a href="{{ url_for('symptom') }}"><button class="w3-button w3-light-blue w3-block" >Check</button></a></p>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="one_quarter">
+          <figure><img src="{{url_for('static', filename='contribution_640x440.png')}}" alt="John" >
+            <figcaption>
+              <h6 class="heading">Make Contribution</h6>
+              <p>Make a difference by your input.</p>
+              <p><a href="{{ url_for('contribute') }}"><button class="w3-button w3-light-blue w3-block" >Contribute</button></a></p>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="one_quarter">
+          <figure><img src="{{url_for('static', filename='vaccine.png')}}" alt="John" >
+            <figcaption>
+              <h6 class="heading">Vaccination Camp</h6>
+              <p>Check the vaccination schedule.</p>
+              <p><a href="{{ url_for('vaccination') }}"><button class="w3-button w3-light-blue w3-block" >View Details</button></a></p>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="one_quarter">
+          <figure><img src="{{url_for('static', filename='bed1_640x440.jpg')}}" alt="John" >
+            <figcaption>
+              <h6 class="heading">Inventory Details</h6>
+              <p>Check the beds and oxygen available.</p>
+              <p><a href="{{ url_for('inventory') }}"><button class="w3-button w3-light-blue w3-block" >Check</button></a></p>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+  </main>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Care & Cure</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+</head>
+<body>
+-->
+<!-- TOP ROW -->
+<!--
+<div class="topnav" style="background-image:url('images/demo/backgrounds/01.png');">
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_left">
+
+        <img src="./logo_orig.png" alt="John" style="width:100%;height: 100%">
+
+      </div>
+      <div class="fl_right">
+
+        <ul class="nospace">
+          <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
+          <li id="searchform">
+            <div>
+              <form action="#" method="post">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter search term&hellip;">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+-->
+  <!----Second row--->
+<!--
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+
+        <h1><a href="./mainpage.html">Cure & Care</a></h1>
+
+      </div>
+      <nav id="mainav" class="fl_right">
+        <a class="home" href="./mainpage.html">Home</a>
+        <a class="contact" href="./helpline.html">Contact Us</a>
+        <a href="./login.html">Login</a>
+      </nav>
+    </header>
+  </div>
+-->
+  <!---Background----->
+<!--
+  <div id="introduction" class="hoc clear">
+    <article>
+      <h2 class="heading">COVID-19 HELP CENTER</h2>
+      <p>Staying apart is the best way to stay United.</p>
+    </article>
+  </div>
+</div>
+
+
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+        <li class="one_third first">
+          <div class="card">
+            <img src="./symtom.png" alt="John" style="width:100%;height: 100%" >
+            <h3>Symtom Checker</h3>
+            <p><button class="w3-button w3-light-blue w3-block">Check</button></p>
+          </div>
+        </li>
+        <li class="one_third">
+          <div class="card">
+            <img src="./contribution_640x440.png" alt="John" style="width:100%;height: 100%">
+            <h3>Contribution</h3>
+            <p><button class="w3-button w3-light-blue w3-block" onclick="document.location.href = './contribute.html'">Contribute</button></p>
+          </div>
+        </li>
+        <li class="one_third">
+          <div class="card">
+            <img src="./vaccine.png" alt="John" style="width:100%;height: 100%">
+            <h3>Vaccination Camp</h3>
+            <p><button class="w3-button w3-light-blue w3-block" onclick="document.location.href = './vaccination_slot.html'">View Details</button></p>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+</body>
+</html> 
+-->

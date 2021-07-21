@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patient Dashboard</title>
+</head>
+<style>
+    .card {
+  padding: 16px;
+  text-align: left;
+  color: #C6c9d8;
+  background-color: #282c3c;
+}
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: left; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu main main main main'
+    'menu main main main main'
+    'menu main main main main'
+    'menu main main main main'
+    'menu main main main main'
+    'left main main main main'
+    'left main main main main'
+    'left footer footer footer footer'
+    'left footer footer footer footer'
+    'left footer footer footer footer'
+    'left footer footer footer footer';
+  grid-gap: 17px;
+  background-color: black;
+}
+.grid-container > div {
+  background-color: #282c3c;
+  text-align: center;
+
+  font-size: 18px;
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+
+    /////////////Ajax Requests////////////
+    $(document).ready(function() {
+         refreshTable();
+         refreshChart();
+         setInterval(refreshTable, 2000);
+         setInterval(refreshChart, 2000);
+    });
+     function refreshTable(){
+
+        $.getJSON('https://spreadsheets.google.com/feeds/list/1oSLcvPqsJm-Tgto7Hu1M6PyZuVrjBj6H6guqs3wgn1o/1/public/full?alt=json', function(data) {
+ //AKfycby6lBLRToCJsCuLEMmu7-MYQkHEF-4RFsuy2FdXMQ1sJojMQqQyM6CkIZdMdNAPzING
+            	var trHTML = '';
+
+            	for (var i = 0; i < data.feed.entry.length; ++i) {
+                	var myData_map, myData_order;
+
+                    trHTML += '<tr><td>' + data.feed.entry[i].gsx$patientid.$t +
+                        	  '</td><td>' + data.feed.entry[i].gsx$patientname.$t +
+                        	  '</td><td>' + data.feed.entry[i].gsx$medicine.$t +
+                        	  '</td><td>' + data.feed.entry[i].gsx$quantity.$t +
+                        	  '</td><td>'  + data.feed.entry[i].gsx$dateandtime.$t +
+                        	  '</td><td>'  + data.feed.entry[i].gsx$heartbeat.$t +
+                        	  '</td><td>'  + data.feed.entry[i].gsx$oxygenlevel.$t +
+                        	  '</td><td>'  + data.feed.entry[i].gsx$bloodpressure.$t +
+                        	  '</td><td>'  + data.feed.entry[i].gsx$timetaken.$t +
+
+
+                        	  '</td></tr>';
+
+                }
+
+                console.log(trHTML);
+        		$('#tableContent').html(trHTML);
+        		var trHTML = '';
+
+        	});
+    }
+
+
+
+
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(refreshChart);
+
+  function refreshChart(){
+    var jsonDataObject =[];
+    var graph_arr = [['Patient ID', 'Vitals', { role: 'style' }]];
+    var bar_color = [];
+    $.getJSON('https://spreadsheets.google.com/feeds/list/1oSLcvPqsJm-Tgto7Hu1M6PyZuVrjBj6H6guqs3wgn1o/2/public/full?alt=json', function(data) {
+      for (var i = 0; i < data.feed.entry.length; ++i) {
+        var json_data = {
+          "OderID" : data.feed.entry[i].gsx$parameter.$t,
+          "TimeTaken": parseFloat(data.feed.entry[i].gsx$reading.$t),
+          "Priority": data.feed.entry[i].gsx$reading.$t
+          };
+          jsonDataObject.push(json_data);
+      };
+      // Setting color for the coloumns of graph according to priority of items
+      for(var j in jsonDataObject){
+        if(jsonDataObject[j].Priority < 70){
+          var color =  '#FF0000';
+          }
+        else if((jsonDataObject[j].Priority >=70) && (jsonDataObject[j].Priority <90)){
+          var color =  '#FFFF00';
+          }
+        else if(jsonDataObject[j].Priority >=90){
+          var color =  '#00FF00';
+          }
+        bar_color.push(color)
+      }
+
+      // Converting Json Object to JavaScript Array
+      for(var j in jsonDataObject){
+          graph_arr.push([jsonDataObject[j].OderID,jsonDataObject[j].TimeTaken, bar_color[j]]);
+      }
+      var graphArray_Final = google.visualization.arrayToDataTable(graph_arr);
+
+      var data = new google.visualization.DataView(graphArray_Final);
+
+     var options = {
+        title: 'Patient Report',
+        titleTextStyle: {color: "#C6c9d8"},
+        fontSize: 17,
+        hAxis: { title: 'Parameter',titleTextStyle: {color: "#C6c9d8"}, textStyle: {color: "#C6c9d8"}},
+        vAxis: { title: 'Reading',titleTextStyle: {color: "#C6c9d8"}, textStyle: {color: "#C6c9d8"}},
+        legend: { position: "none" },
+        backgroundColor: "#282c3c",
+
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById('column_chart'));
+      chart.draw(data, options);
+
+      for(var j in jsonDataObject)
+	{
+		var i = 0;
+		var temp =100;
+		if (i == 0)
+		{
+		    i = 1;
+		    var elem=(document.getElementById("myBar"+j));
+
+			if((jsonDataObject[j].Priority > 90) )
+			{
+				temp=100;
+			}
+			else if((jsonDataObject[j].Priority < 89)&&(jsonDataObject[j].Priority > 70))
+			{
+				temp = 60;
+			}
+		    else
+			{
+				temp=20;
+			}
+			elem.style.width = temp + "%";
+			 if(jsonDataObject[j].Priority > 90){
+				  var color1 =  '#0000FF';
+			}
+				else if((jsonDataObject[j].Priority <89)&&(jsonDataObject[j].Priority > 70)){
+				  var color1 =  '#FFFF00';
+			}
+				else if(jsonDataObject[j].Priority < 70){
+				  var color1 =  '#FF0000';
+			}
+			elem.style.background=color1;
+			elem.innerHTML = "Patient ID:"+jsonDataObject[j].OderID+", Oxygen Level:"+temp  + "%";
+
+
+
+		}
+	}
+
+    });
+}
+
+window.onload = function() {
+	var dataPoints = [];
+	var chart;
+	$.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", function(data) {
+		$.each(data, function(key, value){
+			dataPoints.push({x: value[0], y: parseInt(value[1])});
+		});
+		chart = new CanvasJS.Chart("chartContainer",{
+			title:{
+				text:"Patient Oxygen Reading",
+				fontColor: "#C6c9d8",
+				fontSize: 24
+			},
+
+			backgroundColor: "#282c3c",
+			data: [{
+				type: "line",
+				dataPoints : dataPoints,
+			}]
+		});
+		chart.render();
+		updateChart();
+		setInterval(updateChart, 5000);
+	});
+	function updateChart() {
+	$.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=" + (dataPoints.length + 1) + "&ystart=" + (dataPoints[dataPoints.length - 1].y) + "&length=1&type=json", function(data) {
+		$.each(data, function(key, value) {
+			dataPoints.push({
+			x: parseInt(value[0]),
+			y: parseInt(value[1])
+			});
+		});
+		chart.render();
+		setTimeout(function(){updateChart()}, 2000);
+	});
+	}
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<div class="bgded overlay" style="background-color:black; padding-left: 30px; border-radius: 25px;">
+    <br>
+    <h2 style="color:#C6c9d8">Patient Dashboard!</h2>
+    <body>
+        <div class="grid-container">
+            <div class="item2">
+                    <div class="card">
+                        <center><h3>Personal Details</h3>
+                        <p><b>Patient ID :</b> {{output[0][0]}}   </p>
+                        <p><b>Name       :</b>  {{output[0][1]}}</p>
+                            <p><b>Address    :</b>  {{output[0][2]}}     </p>
+                         <p><b>Email      :</b>  {{output[0][3]}}</p>
+                        <p><b>Phone No   :</b>  {{output[0][4]}}    </p>
+                        <p><b>Age        :</b>  {{output[0][6]}}</p></center>
+                    </div>
+            </div>
+            <div class="item3">
+                <div id="siteAds" class="card">
+                        <article id="mainArticle"><div id="chartContainer" style="height: 400px; width: 100%; background-color: #f00;"></div></article>
+                </div>
+            </div>
+            <div class="item4">
+                <div id="siteAds" class="card">
+                        <nav id="mainNav"><div id="column_chart" style="width: 100%; height: 400px;"></div></nav>
+                </div>
+            </div>
+            <div class="item5">
+                <div id="siteAds" class="card">
+                        <center><h3>Patient Records</h3></center>
+   		<center><table id="table1" border='1'>
+            <tr>
+                <th>Patient ID</th>
+                <th>Patient Name</th>
+                <th>Medicine Given</th>
+                <th>Quantity</th>
+                <th>Date and Time</th>
+                <th>Heart Beat</th>
+                <th>Oxygen Level</th>
+                <th>Blood Pressure</th>
+                <th>Time Taken</th>
+            </tr>
+            <tbody id="tableContent">
+            </tbody>
+        </table></center>
+                </div>
+            </div>
+        </div>
+    </body>
+</div>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inventory</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{{url_for('static', filename='layout.css')}}" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" style="background-image:url('./static/bg_black.jpg');">
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_left">
+
+        <ul class="nospace">
+          <img src="{{url_for('static', filename='logo_final_1_75.png')}}" alt="John" >
+        </ul>
+
+      </div>
+      <div class="fl_right">
+
+        <ul class="nospace">
+
+          <li><a href="{{ url_for('login') }}" title="Login"><i class="fa fa-sign-in"></i></a></li>
+          <li><a title="Search"><i class="fa fa-search"></i></a></li>
+          <li id="searchform">
+            <a title="Search"></a>
+            <div>
+              <form action="#" method="post">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter search term&hellip;">
+                  <button type="submit"></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+
+        <h1><a href="{{ url_for('home') }}">Cure & Care</a></h1>
+
+      </div>
+      <nav id="mainav" class="fl_right">
+
+        <ul class="clear">
+          <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('helpline') }}">Contact Us</a></li>
+          <li class="active"><a href=".{{ url_for('login') }}">Login</a></li>
+        </ul>
+
+      </nav>
+    </header>
+  </div>
+  <div id="breadcrumb" class="hoc clear">
+    <h6 class="heading">Inventory Details!</h6>
+
+  </div>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <div class="content">
+        <p>Total number of beds in the hospital's inventory:<a style="color:#f27e02" href="#">{{inventory_beds}}</a></p>
+        <p> Total litres of oxygen in the hospital's inventory:<a style="color:#f27e02" href="#">{{inventory_oxygen}}</a></p>
+        <p> Number of patients presently admitted:<a style="color:#f27e02" href="#">{{output}}</a></p>
+        <p> Number of beds available:<a style="color:#f27e02" href="#">{{beds}}</a></p>
+        <p> Oxygen available:<a style="color:#f27e02" href="#">{{oxy_days}} litres</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

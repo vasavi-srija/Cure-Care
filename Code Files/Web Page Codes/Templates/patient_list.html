@@ -1,0 +1,232 @@
+<html>
+<head>
+<script type="text/javascript">
+function edit_row(no)
+{
+ document.getElementById("edit_button"+no).style.display="none";
+ document.getElementById("save_button"+no).style.display="block";
+	
+ var name=document.getElementById("name_row"+no);
+ var country=document.getElementById("country_row"+no);
+ var age=document.getElementById("age_row"+no);
+	
+ var name_data=name.innerHTML;
+ var country_data=country.innerHTML;
+ var age_data=age.innerHTML;
+	
+ name.innerHTML="<input type='text' id='name_text"+no+"' value='"+name_data+"'>";
+ country.innerHTML="<input type='text' id='country_text"+no+"' value='"+country_data+"'>";
+ age.innerHTML="<input type='text' id='age_text"+no+"' value='"+age_data+"'>";
+}
+
+function save_row(no)
+{
+ var name_val=document.getElementById("name_text"+no).value;
+ var country_val=document.getElementById("country_text"+no).value;
+ var age_val=document.getElementById("age_text"+no).value;
+
+ document.getElementById("name_row"+no).innerHTML=name_val;
+ document.getElementById("country_row"+no).innerHTML=country_val;
+ document.getElementById("age_row"+no).innerHTML=age_val;
+
+ document.getElementById("edit_button"+no).style.display="block";
+ document.getElementById("save_button"+no).style.display="none";
+}
+
+function delete_row(no)
+{
+ document.getElementById("row"+no+"").outerHTML="";
+}
+
+function add_row()
+{
+ var new_name=document.getElementById("new_name").value;
+ var new_country=document.getElementById("new_country").value;
+ var new_age=document.getElementById("new_age").value;
+	
+ var table=document.getElementById("data_table");
+ var table_len=(table.rows.length)-1;
+ var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='name_row"+table_len+"'>"+new_name+"</td><td id='country_row"+table_len+"'>"+new_country+"</td><td id='age_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit_button"+table_len+"' value='Edit' class='edit' onclick='edit_row("+table_len+")'> <input type='button' id='save_button"+table_len+"' value='Save' class='save' onclick='save_row("+table_len+")'> <input type='button' value='Delete' class='delete' onclick='delete_row("+table_len+")'></td></tr>";
+
+ document.getElementById("new_name").value="";
+ document.getElementById("new_country").value="";
+ document.getElementById("new_age").value="";
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+          
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+          
+        tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+        body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  width: 100%
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+  		<a href="{{ url_for('home') }}">Home</a>
+  		<a href="{{ url_for('after_login') }}">Profile</a>
+  		<div class="topnav-right">
+        <a href="{{ url_for('login') }}">Login</a>
+  		</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<center><h2>Patient Records</h2></center>
+<br>
+<div id="wrapper">
+<table align='center' cellspacing=2 cellpadding=5 id="data_table" >
+<tr>
+    <th>Patient ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th>Phone No</th>
+    <th>Covid Status</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>Temperature</th>
+    <th>Weakness</th>
+    <th>Breathing Problem</th>
+    <th>Drowsiness</th>
+    <th>Chest Pain</th>
+    <th>Immunity History</th>
+    <th>Diabetic</th>
+    <th>Blood Pressure</th>
+    <th>Loss of smell</th>
+</tr>
+    {% for row in output %}
+        <tr>
+            <td id="0">{{row[0]}}</td>
+            <td id="1">{{row[1]}}</td>
+            <td id="2">{{row[2]}}</td>
+            <td id="3">{{row[3]}}</td>
+            <td id="4">{{row[4]}}</td>
+            <td id="5">{{row[5]}}</td>
+            <td id="6">{{row[6]}}</td>
+            <td id="7">{{row[7]}}</td>
+            <td id="8">{{row[8]}}</td>
+            <td id="9">{{row[9]}}</td>
+            <td id="10">{{row[10]}}</td>
+            <td id="11">{{row[11]}}</td>
+            <td id="12">{{row[12]}}</td>
+            <td id="13">{{row[13]}}</td>
+            <td id="14">{{row[14]}}</td>
+            <td id="15">{{row[15]}}</td>
+            <td id="16">{{row[16]}}</td>
+            <td id="17">{{row[17]}}</td>
+            <td>
+                <i style="font-size:24px" class="fa edit" id="edit_button1" value="Edit"  onclick="edit_row('1')">&#xf044;</i>
+                <i style="font-size:24px" class="fa save" id="save_button1" value="Save"  onclick="save_row('1')">&#xf046;</i>
+                <i style="font-size:24px" onclick="delete_row('1')" class="fa">&#xf1f8;</i>
+
+            </td>
+        </tr>
+    {% endfor %}
+<tr>
+<td><a href="{{ url_for('add_patient') }}"><input type="button" class="add" value="Add Row"></td>
+</tr>
+</table>
+</body>
+
+</html>

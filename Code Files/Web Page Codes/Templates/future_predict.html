@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+<title>Predict Capacity</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{{url_for('static', filename='layout.css')}}" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+  .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background:  #669999;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background:  #a3c2c2;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+</style>
+<body>
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" style="background-image:url('./static/bg_black.jpg');">
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_left">
+
+        <ul class="nospace">
+          <img src="{{url_for('static', filename='logo_final_1_75.png')}}" alt="John" >
+        </ul>
+
+      </div>
+      <div class="fl_right">
+
+        <ul class="nospace">
+
+          <li><a href="{{ url_for('login') }}" title="Login"><i class="fa fa-sign-in"></i></a></li>
+          <li><a title="Search"><i class="fa fa-search"></i></a></li>
+          <li id="searchform">
+            <a title="Search"></a>
+            <div>
+              <form action="#" method="post">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter search term&hellip;">
+                  <button type="submit"></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+
+        <h1><a href="{{ url_for('home') }}">Cure & Care</a></h1>
+
+      </div>
+      <nav id="mainav" class="fl_right">
+
+        <ul class="clear">
+          <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('helpline') }}">Contact Us</a></li>
+          <li class="active"><a href=".{{ url_for('login') }}">Login</a></li>
+        </ul>
+
+      </nav>
+    </header>
+  </div>
+  <div id="breadcrumb" class="hoc clear">
+    <h6 class="heading">Predict Capacity!</h6>
+
+  </div>
+</div>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <div class="content">
+      <!-- ################################################################################################ -->
+      <div id="contribute">
+          <figure>
+              <header class="heading">Please enter the frequency of patients being admitted per day:</header>
+            <br>
+
+            <form action="{{ url_for('oxy_bed') }}" method="POST">
+          <input type="text" id="freq" name="freq" value=""><br>
+
+
+
+        <div class="btn-block">
+          <button type="submit">Submit</button>
+        </div>
+               </figure>
+         </form>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
