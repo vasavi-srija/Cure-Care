@@ -16,31 +16,43 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `doctors_list`
+-- Table structure for table `patients_list`
 --
 
-DROP TABLE IF EXISTS `doctors_list`;
+DROP TABLE IF EXISTS `patients_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `doctors_list` (
-  `UserID` int NOT NULL,
-  `Email` varchar(45) DEFAULT NULL,
-  `Password` varchar(45) DEFAULT NULL,
-  `Phno` varchar(45) DEFAULT NULL,
-  `Designation` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`UserID`),
-  UNIQUE KEY `UserID_UNIQUE` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `patients_list` (
+  `PatientID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `phone_no` int NOT NULL,
+  `covid_status` int NOT NULL,
+  `age` int NOT NULL,
+  `gender` int NOT NULL,
+  `temperature` int NOT NULL,
+  `weakness` int NOT NULL,
+  `breath_prob` int NOT NULL,
+  `drowsiness` int NOT NULL,
+  `chest_pain` int NOT NULL,
+  `immunity_history` int NOT NULL,
+  `diabetic` int NOT NULL,
+  `bp` int NOT NULL,
+  `smell_loss` int NOT NULL,
+  PRIMARY KEY (`PatientID`),
+  UNIQUE KEY `PatientID_UNIQUE` (`PatientID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `doctors_list`
+-- Dumping data for table `patients_list`
 --
 
-LOCK TABLES `doctors_list` WRITE;
-/*!40000 ALTER TABLE `doctors_list` DISABLE KEYS */;
-INSERT INTO `doctors_list` VALUES (1,NULL,'abcdef',NULL,NULL);
-/*!40000 ALTER TABLE `doctors_list` ENABLE KEYS */;
+LOCK TABLES `patients_list` WRITE;
+/*!40000 ALTER TABLE `patients_list` DISABLE KEYS */;
+INSERT INTO `patients_list` VALUES (1,'aditya','palakol','gonellaaditya67@gmail.com',949,1,22,1,100,1,1,1,1,1,1,1,1);
+/*!40000 ALTER TABLE `patients_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-13 10:57:48
+-- Dump completed on 2021-05-13 10:57:49
